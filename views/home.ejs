@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            gap:1rem;
+            margin:auto;
+            text-align: center;
+            background-image: url("https://img.freepik.com/free-vector/blue-data-technology-background-vector-with-binary-code_53876-110871.jpg");
+            background-size: cover;
+            color:white;
+        }
+        table{
+            margin:auto;
+        }
+        table td{
+            border:1px solid white;
+            padding:0.5rem;
+            margin-top:1rem;
+        }
+        label{
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+    </style>
+    <h1><u>URL SHORTNER</u></h1>
+    <% if(locals.id){
+        %><p>URL Generated:http://localhost:8000/<%=id%></p><%
+    } %>
+    <form method="post" action="/url">
+        <label>Enter original URL</label>
+        <input name="url" type="text" placeholder="https://www.example.com">
+        <button type="submit">Generate</button>
+    </form>
+    <div>
+   <% if (locals.urls) { %>
+    <table>
+        <thead>
+            <tr>
+                <th>Sr. No</th>
+                <th>Short ID</th>
+                <th>Redirect URL</th>
+                <th>Total Clicks</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% urls.map((url, index) => { %>
+                <tr>
+                    <td><%= index + 1 %></td>
+                    <td><%= url.shortId %></td>
+                    <td><%= url.redirectURL %></td>
+                    <td><%= url.visitHistory.length %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+<% } %>
+        </div>
+</body>
+</html>
